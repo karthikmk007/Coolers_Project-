@@ -1,26 +1,86 @@
 @import "tailwindcss";
 
+/* ─── Design Tokens ──────────────────────────────────────────── */
+@theme {
+  /* Colors */
+  --color-cream:     #F2EDE0;
+  --color-cream-dim: #E8E2D4;
+  --color-ink:       #0A0A0A;
+  --color-ink-soft:  #3D3D3D;
+  --color-lime:      #C8FF47;
+  --color-lime-dim:  #A8D93A;
+  --color-vermilion: #E63522;
+  --color-vermilion-dim: #BF2B1A;
+  --color-amber:     #E8890C;
+  --color-amber-dim: #C47409;
+
+  /* Fonts */
+  --font-display: var(--font-fraunces);
+  --font-sans:    var(--font-archivo);
+  --font-mono:    var(--font-jetbrains);
+}
+
+/* ─── Base ───────────────────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background-color: #F2EDE0;
+  color: #0A0A0A;
+  font-family: var(--font-archivo), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ─── Noise texture overlay (applied to body) ────────────────── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+  opacity: 0.4;
+}
+
+/* ─── Typography helpers ─────────────────────────────────────── */
+/* Fraunces italic — use for logos, emphasis words, product names */
+.font-display {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-style: italic;
+}
+/* Fraunces upright — use for editorial headings */
+.font-display-roman {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-style: normal;
+}
+
+.font-mono {
+  font-family: var(--font-jetbrains), "Courier New", monospace;
+  font-feature-settings: "liga" 1, "calt" 1;
+}
+
+/* ─── Selection ──────────────────────────────────────────────── */
+::selection {
+  background-color: #C8FF47;
+  color: #0A0A0A;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F2EDE0;
+}
+::-webkit-scrollbar-thumb {
+  background: #0A0A0A;
+  border-radius: 0;
 }

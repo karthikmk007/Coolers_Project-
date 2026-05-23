@@ -8,9 +8,11 @@
     "start": "next start"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.105.4",
     "next": "16.2.6",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "use-debounce": "^10.1.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -19,6 +21,6 @@
     "@types/react-dom": "^19",
     "babel-plugin-react-compiler": "1.0.0",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5.9.3"
   }
 }

@@ -1,0 +1,52 @@
+name: LCBO Scraper
+
+on:
+  # Run daily at 6 AM UTC (2 AM EST / 3 AM EDT — after overnight inventory updates)
+  schedule:
+    - cron: "0 6 * * *"
+
+  # Allow manual trigger from the GitHub Actions UI
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run (fetch only, no DB writes)"
+        required: false
+        default: "false"
+        type: choice
+        options: ["true", "false"]
+
+jobs:
+  scrape:
+    name: Scrape LCBO RTD Catalog
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+          cache-dependency-path: scripts/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Run scraper
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            python scripts/scrape.py --dry-run
+          else
+            python scripts/scrape.py
+          fi
+
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "::error::LCBO scrape failed. Check scrape_run table for details."

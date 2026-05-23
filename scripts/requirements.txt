@@ -1,0 +1,8 @@
+supabase==2.*
+python-dotenv==1.*
+requests==2.*
+beautifulsoup4==4.*
+lxml==5.*
+sentence-transformers==3.*
+fastapi==0.*
+uvicorn==0.*
