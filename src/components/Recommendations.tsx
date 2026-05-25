@@ -5,137 +5,245 @@ import Link from "next/link";
 
 const ML_API_URL = process.env.NEXT_PUBLIC_ML_API_URL || "";
 
+const CATEGORY_ACCENT: Record<string, string> = {
+  hard_seltzer: "text-lime",
+  cooler:        "text-vermilion",
+  cider:         "text-amber",
+  radler:        "text-lime-dim",
+  other:         "text-ink/40",
+};
+
+const CATEGORY_TILE: Record<string, { bg: string; text: string; label: string }> = {
+  hard_seltzer: { bg: "bg-lime",     text: "text-ink",   label: "Seltzer" },
+  cooler:        { bg: "bg-vermilion", text: "text-cream", label: "Cooler"  },
+  cider:         { bg: "bg-amber",   text: "text-cream", label: "Cider"   },
+  radler:        { bg: "bg-lime-dim", text: "text-ink",  label: "Radler"  },
+  other:         { bg: "bg-ink",     text: "text-cream", label: "RTD"     },
+};
+
+type Rec = {
+  id: number;
+  name: string;
+  brand_name: string;
+  normalized_category: string;
+  abv: number | null;
+  price_cents: number | null;
+  image_url: string | null;
+  similarity: number;
+};
+
 export function Recommendations({ productId }: { productId: number }) {
-  const [recommendations, setRecommendations] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-  const [devMode, setDevMode] = useState(true);
+  const [recs, setRecs]         = useState<Rec[]>([]);
+  const [loading, setLoading]   = useState(true);
+  const [error, setError]       = useState<string | null>(null);
+  const [devMode, setDevMode]   = useState(false);
 
   useEffect(() => {
-    // If no ML API URL is configured, skip the fetch entirely
     if (!ML_API_URL) {
-      setError(true);
+      setError("no_api");
       setLoading(false);
       return;
     }
 
-    const controller = new AbortController();
+    const ctrl = new AbortController();
 
-    async function fetchRecs() {
-      try {
-        const res = await fetch(`${ML_API_URL}/recommend`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ product_id: productId, limit: 4 }),
-          signal: controller.signal,
-        });
+    fetch(`${ML_API_URL}/recommend`, {
+      method:  "POST",
+      headers: { "Content-Type": "application/json" },
+      body:    JSON.stringify({ product_id: productId, limit: 4, threshold: 0.3 }),
+      signal:  ctrl.signal,
+    })
+      .then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json();
+      })
+      .then((d) => setRecs(d.results || []))
+      .catch(() => { if (!ctrl.signal.aborted) setError("fetch_failed"); })
+      .finally(() => { if (!ctrl.signal.aborted) setLoading(false); });
 
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
-        setRecommendations(data.results || []);
-      } catch {
-        // Silently degrade — the offline banner handles the UX
-        if (!controller.signal.aborted) {
-          setError(true);
-        }
-      } finally {
-        if (!controller.signal.aborted) {
-          setLoading(false);
-        }
-      }
-    }
-
-    fetchRecs();
-
-    return () => controller.abort();
+    return () => ctrl.abort();
   }, [productId]);
 
-  if (error) {
+  /* ── Offline banner ──────────────────────────────────────────── */
+  if (error === "no_api") {
     return (
-      <div className="mt-8 border border-ink/10 bg-ink/5 p-6 relative">
-        <div className="absolute -top-3 left-4 bg-ink text-cream px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest">
+      <div className="border border-ink/10 p-6 relative">
+        <div className="absolute -top-3 left-4 bg-ink text-lime px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest">
           ML Layer · Offline
         </div>
-        <p className="font-mono text-sm text-ink/50 leading-relaxed">
-          Recommendation engine is not connected.{" "}
-          {!ML_API_URL && (
-            <span className="text-ink/30">
-              Set <code className="text-vermilion/60">NEXT_PUBLIC_ML_API_URL</code> in{" "}
-              <code className="text-vermilion/60">.env.local</code> and start the FastAPI server.
-            </span>
-          )}
+        <p className="font-mono text-xs text-ink/40 leading-relaxed">
+          Set{" "}
+          <code className="text-vermilion">NEXT_PUBLIC_ML_API_URL=http://localhost:8000</code>{" "}
+          in <code className="text-vermilion">.env.local</code> and start the FastAPI server.
+        </p>
+        <p className="font-mono text-[10px] text-ink/25 mt-2">
+          python3 -m uvicorn api.main:app --port 8000
         </p>
       </div>
     );
   }
 
-  if (loading) {
+  if (error === "fetch_failed") {
     return (
-      <div className="mt-8 border border-ink/10 p-6 animate-pulse bg-ink/5">
-        <div className="h-4 w-48 bg-ink/10 mb-4" />
-        <div className="h-32 bg-ink/5" />
+      <div className="border border-vermilion/20 bg-vermilion/5 p-6 font-mono text-xs text-vermilion">
+        Could not reach recommendation engine at{" "}
+        <code>{ML_API_URL}</code>. Is the FastAPI server running?
       </div>
     );
   }
 
-  if (recommendations.length === 0) {
-    return null;
+  /* ── Loading skeleton ────────────────────────────────────────── */
+  if (loading) {
+    return (
+      <div>
+        <div className="flex items-center justify-between mb-6">
+          <div className="font-mono text-[10px] uppercase tracking-widest text-ink/40">
+            Section 04 — Similar Vibes
+          </div>
+        </div>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 animate-pulse">
+          {[0, 1, 2, 3].map((i) => (
+            <div key={i}>
+              <div className="aspect-[3/4] bg-ink/8 mb-3" />
+              <div className="h-3 w-3/4 bg-ink/8 mb-2" />
+              <div className="h-3 w-1/2 bg-ink/8" />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
   }
 
+  if (recs.length === 0) return null;
+
+  /* ── Recommendations ─────────────────────────────────────────── */
   return (
-    <div className="mt-12 border-t border-ink/10 pt-12">
-      <div className="flex items-center justify-between mb-8">
-        <h2 className="font-display text-3xl text-ink">Similar Profiles</h2>
+    <div>
+      {/* Header */}
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <div className="font-mono text-[10px] uppercase tracking-widest text-ink/40 mb-1">
+            Section 04 — Similar Vibes
+          </div>
+          <h2 className="font-display-roman text-3xl md:text-4xl tracking-tight text-ink">
+            You might also{" "}
+            <em className="font-display text-vermilion">crack</em> these.
+          </h2>
+        </div>
+
+        {/* Dev Mode toggle */}
         <button
-          onClick={() => setDevMode(!devMode)}
-          className={`px-3 py-1 font-mono text-[10px] tracking-widest uppercase transition-colors border ${
-            devMode ? "bg-lime text-ink border-lime" : "bg-transparent text-ink/40 border-ink/20"
+          onClick={() => setDevMode((d) => !d)}
+          className={`flex items-center gap-2 px-3 py-1.5 font-mono text-[10px] tracking-widest uppercase border transition-colors ${
+            devMode
+              ? "bg-ink text-lime border-ink"
+              : "text-ink/40 border-ink/20 hover:border-ink hover:text-ink"
           }`}
         >
-          Dev Mode {devMode ? "ON" : "OFF"}
+          <span
+            className={`inline-block w-1.5 h-1.5 rounded-full ${
+              devMode ? "bg-lime" : "bg-ink/20"
+            }`}
+          />
+          Dev Mode
         </button>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 relative">
-        {recommendations.map((rec) => (
-          <div key={rec.id} className="relative group">
-            {/* The recommendation card itself */}
+      {/* Dev Mode — model info bar */}
+      {devMode && (
+        <div className="mb-6 border border-lime/30 bg-lime/5 px-4 py-3 font-mono text-[10px] text-ink/60 flex flex-wrap gap-4">
+          <span className="text-lime font-medium">● model: all-MiniLM-L6-v2</span>
+          <span>metric: cosine similarity</span>
+          <span>dimensions: 384</span>
+          <span>engine: in-memory sklearn</span>
+          <span>storage: pgvector (supabase)</span>
+        </div>
+      )}
+
+      {/* Cards */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        {recs.map((rec) => {
+          const price   = rec.price_cents ? `$${(rec.price_cents / 100).toFixed(2)}` : "—";
+          const pct     = Math.round(rec.similarity * 100);
+          const accent  = CATEGORY_ACCENT[rec.normalized_category] ?? "text-ink/40";
+          const simBar  = Math.max(4, pct); // min bar width %
+
+          return (
             <Link
+              key={rec.id}
               href={`/products/${rec.id}`}
-              className="flex items-center gap-4 p-4 border border-ink/10 hover:border-ink/40 transition-colors bg-cream"
+              className="group flex flex-col"
             >
-              <div className="w-16 h-16 bg-ink/5 flex-shrink-0 flex items-center justify-center p-2">
+              {/* Thumbnail */}
+              <div className="aspect-[3/4] relative overflow-hidden mb-3">
                 {rec.image_url ? (
-                  <img
-                    src={rec.image_url}
-                    alt={rec.name}
-                    className="object-contain w-full h-full mix-blend-multiply"
-                  />
+                  <div className="absolute inset-0 bg-cream-dim">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={rec.image_url}
+                      alt={rec.name}
+                      className="absolute inset-0 w-full h-full object-contain p-4 mix-blend-multiply group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
                 ) : (
-                  <div className="font-display text-xl text-ink/20">
-                    {rec.normalized_category.substring(0, 1).toUpperCase()}
+                  <div className={`absolute inset-0 flex flex-col justify-between p-4 ${CATEGORY_TILE[rec.normalized_category]?.bg ?? "bg-ink"} ${CATEGORY_TILE[rec.normalized_category]?.text ?? "text-cream"}`}>
+                    {/* Category badge */}
+                    <span className="font-mono text-[9px] tracking-widest uppercase opacity-70">
+                      {CATEGORY_TILE[rec.normalized_category]?.label ?? rec.normalized_category}
+                    </span>
+                    {/* Product name */}
+                    <p className="font-display text-xl leading-[1.05] tracking-tight">
+                      {rec.name}
+                    </p>
+                    {/* Watermark */}
+                    <span className="font-mono text-[8px] tracking-widest uppercase opacity-30">
+                      CRACKED · CA
+                    </span>
+                  </div>
+                )}
+
+                {/* Dev Mode overlay — similarity score */}
+                {devMode && (
+                  <div className="absolute bottom-0 inset-x-0 bg-ink/90 px-2 py-1.5 pointer-events-none">
+                    <div className="flex items-center justify-between font-mono text-[9px] text-lime mb-1">
+                      <span>cosine sim</span>
+                      <span className="font-medium">{rec.similarity.toFixed(4)}</span>
+                    </div>
+                    {/* Similarity bar */}
+                    <div className="h-0.5 bg-lime/20 w-full">
+                      <div
+                        className="h-full bg-lime transition-all"
+                        style={{ width: `${simBar}%` }}
+                      />
+                    </div>
+                    <div className="text-right font-mono text-[8px] text-lime/50 mt-0.5">
+                      pgvector match
+                    </div>
                   </div>
                 )}
               </div>
-              <div>
-                <div className="font-mono text-[10px] uppercase tracking-widest text-ink/40">
-                  {rec.brand_name || "Unknown"}
-                </div>
-                <div className="font-sans font-bold text-sm leading-tight text-ink group-hover:text-vermilion transition-colors">
-                  {rec.name}
-                </div>
-              </div>
-            </Link>
 
-            {/* Dev Mode Overlay */}
-            {devMode && (
-              <div className="absolute -top-3 -right-3 bg-ink text-lime px-2 py-1 font-mono text-[10px] z-10 pointer-events-none flex flex-col gap-1 items-end shadow-sm">
-                <span>cosine sim: {rec.similarity.toFixed(4)}</span>
-                <span className="text-cream/50 text-[8px]">pgvector match</span>
+              {/* Info */}
+              <p className={`font-mono text-[9px] tracking-widest uppercase mb-0.5 ${accent}`}>
+                {rec.normalized_category.replace("_", " ")}
+              </p>
+              <p className="font-sans text-sm leading-snug text-ink group-hover:text-vermilion transition-colors line-clamp-2 mb-1">
+                {rec.name}
+              </p>
+              <div className="flex items-center justify-between font-mono text-[10px] text-ink/40">
+                <span className="uppercase tracking-widest truncate">{rec.brand_name}</span>
+                <span className="flex-shrink-0 ml-2">{price}</span>
               </div>
-            )}
-          </div>
-        ))}
+
+              {/* Similarity pill (visible mode) */}
+              {!devMode && (
+                <div className="mt-1.5 font-mono text-[9px] text-ink/30">
+                  {pct}% match
+                </div>
+              )}
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
