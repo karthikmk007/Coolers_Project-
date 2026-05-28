@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState, useState } from "react";
+import Link from "next/link";
 import { submitReview } from "@/app/actions/review";
 
 function StarPicker({
@@ -36,9 +37,44 @@ function StarPicker({
   );
 }
 
-export function RatingForm({ productId }: { productId: number }) {
+export function RatingForm({
+  productId,
+  isLoggedIn,
+}: {
+  productId: number;
+  isLoggedIn: boolean;
+}) {
   const [rating, setRating] = useState(0);
   const [state, action, pending] = useActionState(submitReview, null);
+
+  // Show login gate for unauthenticated users
+  if (!isLoggedIn) {
+    return (
+      <div className="border border-ink/15 p-5 md:p-7 flex flex-col items-start gap-4">
+        <div className="flex items-center gap-2">
+          <span className="text-vermilion text-sm">✦</span>
+          <h3 className="font-display text-xl md:text-2xl text-ink">Rate this bottle for science</h3>
+        </div>
+        <p className="font-mono text-[11px] uppercase tracking-widest text-ink/40 leading-relaxed">
+          Sign in to log your verdict and contribute to the analytics pipeline.
+        </p>
+        <div className="flex items-center gap-3 mt-1">
+          <Link
+            href={`/login?next=/products/${productId}`}
+            className="px-5 py-2.5 bg-ink text-cream font-mono text-[10px] tracking-widest uppercase hover:bg-ink/80 transition-colors"
+          >
+            Sign In →
+          </Link>
+          <Link
+            href="/signup"
+            className="px-5 py-2.5 border border-ink/20 font-mono text-[10px] tracking-widest uppercase hover:border-ink transition-colors"
+          >
+            Create Account
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   if (state?.success) {
     return (

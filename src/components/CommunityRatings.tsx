@@ -1,6 +1,7 @@
 // Server component — fetches reviews from Supabase
 
-import { supabase } from "@/lib/supabase";
+import { createSupabaseServerClient } from "@/lib/supabase-server";
+import { getUser } from "@/lib/auth";
 import { RatingForm } from "./RatingForm";
 
 type Review = {
@@ -13,7 +14,8 @@ type Review = {
 
 async function fetchReviews(productId: number): Promise<Review[]> {
   try {
-    const { data, error } = await (supabase as any)
+    const supabase = await createSupabaseServerClient();
+    const { data, error } = await supabase
       .from("review")
       .select("id, rating, body, author_name, created_at")
       .eq("product_id", productId)
@@ -50,7 +52,7 @@ function timeAgo(iso: string): string {
 }
 
 export async function CommunityRatings({ productId }: { productId: number }) {
-  const reviews = await fetchReviews(productId);
+  const [reviews, user] = await Promise.all([fetchReviews(productId), getUser()]);
   const total   = reviews.length;
   const avg     = total > 0
     ? reviews.reduce((s, r) => s + r.rating, 0) / total
@@ -118,7 +120,7 @@ export async function CommunityRatings({ productId }: { productId: number }) {
       </div>
 
       {/* ── Rating Form ── */}
-      <RatingForm productId={productId} />
+      <RatingForm productId={productId} isLoggedIn={!!user} />
 
       {/* ── Rating Feed ── */}
       {reviews.length > 0 && (

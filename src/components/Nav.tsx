@@ -1,10 +1,14 @@
 import Link from "next/link";
+import { getUser } from "@/lib/auth";
+import { logout } from "@/app/actions/auth";
 
 interface NavProps {
   active?: "index" | "catalogue";
 }
 
-export function Nav({ active }: NavProps) {
+export async function Nav({ active }: NavProps) {
+  const user = await getUser();
+
   return (
     <nav className="flex items-center justify-between px-6 md:px-12 py-4 border-b border-ink/10">
       <Link href="/" className="flex items-baseline gap-2.5">
@@ -14,7 +18,7 @@ export function Nav({ active }: NavProps) {
         </span>
       </Link>
 
-      <div className="flex items-center gap-8">
+      <div className="flex items-center gap-6 md:gap-8">
         <Link
           href="/"
           className={`font-mono text-[11px] tracking-widest uppercase transition-colors ${
@@ -35,14 +39,29 @@ export function Nav({ active }: NavProps) {
         >
           Catalogue
         </Link>
-        <a
-          href="https://github.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="px-4 py-1.5 bg-ink text-cream font-mono text-[11px] tracking-widest uppercase hover:bg-ink/80 transition-colors"
-        >
-          Source ↗
-        </a>
+
+        {user ? (
+          <div className="flex items-center gap-3">
+            <span className="hidden md:block font-mono text-[10px] uppercase tracking-widest text-ink/40 truncate max-w-[120px]">
+              {user.user_metadata?.handle ?? user.email?.split("@")[0]}
+            </span>
+            <form action={logout}>
+              <button
+                type="submit"
+                className="px-4 py-1.5 border border-ink/25 text-ink font-mono text-[11px] tracking-widest uppercase hover:bg-ink hover:text-cream transition-colors"
+              >
+                Sign Out
+              </button>
+            </form>
+          </div>
+        ) : (
+          <Link
+            href="/login"
+            className="px-4 py-1.5 bg-ink text-cream font-mono text-[11px] tracking-widest uppercase hover:bg-ink/80 transition-colors"
+          >
+            Sign In
+          </Link>
+        )}
       </div>
     </nav>
   );

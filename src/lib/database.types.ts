@@ -102,6 +102,30 @@ export interface Database {
         };
       };
     };
+      review: {
+        Row: {
+          id: number;
+          product_id: number;
+          rating: number;
+          body: string | null;
+          author_name: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: number;
+          product_id: number;
+          rating: number;
+          body?: string | null;
+          author_name?: string;
+          created_at?: string;
+        };
+        Update: {
+          rating?: number;
+          body?: string | null;
+          author_name?: string;
+        };
+      };
+    };
     Views: Record<string, never>;
     Functions: Record<string, never>;
     Enums: {

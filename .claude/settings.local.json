@@ -44,7 +44,9 @@
       "Bash(echo \"Next.js PID: $!\")",
       "Bash(kill 14977)",
       "Bash(npm list *)",
-      "Bash(pip3 freeze *)"
+      "Bash(pip3 freeze *)",
+      "Bash(gh pr *)",
+      "Bash(xargs cat)"
     ]
   }
 }

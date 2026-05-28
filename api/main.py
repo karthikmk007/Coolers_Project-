@@ -204,12 +204,16 @@ async def lifespan(app: FastAPI):
 # ── App ──────────────────────────────────────────────────────────────
 app = FastAPI(title="CRACKED Flavour Recommendation API", version="1.0.0", lifespan=lifespan)
 
+# Restrict CORS to the frontend origin; falls back to localhost for local dev
+_raw_origins = os.environ.get("ALLOWED_ORIGINS", "http://localhost:3000")
+_allowed_origins = [o.strip() for o in _raw_origins.split(",") if o.strip()]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=_allowed_origins,
+    allow_credentials=False,
+    allow_methods=["GET", "POST"],
+    allow_headers=["Content-Type"],
 )
 
 # ── Schemas ──────────────────────────────────────────────────────────
