@@ -28,26 +28,6 @@ const CAT_LABEL: Record<string, string> = {
   other:         "RTD",
 };
 
-// ── ML fetch helper ───────────────────────────────────────────────────────────
-
-async function fetchTopSimilarity(productId: number): Promise<number | null> {
-  const apiUrl = process.env.NEXT_PUBLIC_ML_API_URL;
-  if (!apiUrl) return null;
-  try {
-    const r = await fetch(`${apiUrl}/recommend`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ product_id: productId, limit: 1, threshold: 0.1 }),
-      next: { revalidate: 3600 },
-    });
-    if (!r.ok) return null;
-    const json = await r.json();
-    return (json.results?.[0]?.similarity as number) ?? null;
-  } catch {
-    return null;
-  }
-}
-
 // ── Description generator ────────────────────────────────────────────────────
 
 function makeDescription(
@@ -104,7 +84,6 @@ export default async function ProductDetailPage({
   const price       = p.price_cents ? `$${(p.price_cents / 100).toFixed(2)}` : "—";
   const flavors     = extractFlavors(p.name);
   const description = makeDescription(brandName, catLabel, p.abv, flavors);
-  const similarity  = await fetchTopSimilarity(productId);
 
   return (
     <div className="min-h-screen bg-cream flex flex-col">
@@ -213,21 +192,6 @@ export default async function ProductDetailPage({
               </span>
             </div>
           </div>
-
-          {/* ML vector card — only shows when ML API is running */}
-          {similarity !== null && (
-            <div className="bg-ink text-lime px-5 py-4 mb-8 font-mono">
-              <div className="flex items-center justify-between text-[10px] uppercase tracking-widest mb-2">
-                <span className="text-lime/60">Vector Cosine Similarity:</span>
-                <span className="font-bold text-lime">{similarity.toFixed(2)}</span>
-              </div>
-              {flavors.length > 0 && (
-                <p className="text-[9px] text-lime/50 uppercase tracking-widest">
-                  Tags: {flavors.join(", ")}
-                </p>
-              )}
-            </div>
-          )}
 
           {/* CTAs */}
           <div className="flex gap-3 mt-auto">
