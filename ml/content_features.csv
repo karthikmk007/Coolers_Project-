@@ -1,0 +1,51 @@
+cooler_id,name,brand_name,abv,price_tier,abv_tier,category_code,cat_cider,cat_cooler,cat_hard_seltzer,cat_other,cat_radler,abv_norm,price_norm
+1,-196 Lemon Vodka Soda 500mL,-196 LEMON VODKA SODA,5.0,mid,standard,2,False,False,True,False,False,1.0,0.034907597535934295
+2,Absolut Cocktail Espresso Martini 355mL,Absolut,5.0,premium,standard,1,False,True,False,False,False,1.0,0.997946611909651
+3,Absolut Cocktail Vodka Mojito 355mL,Absolut,5.0,premium,standard,1,False,True,False,False,False,1.0,1.0
+4,Absolut Ocean Spray Cranberry 355mL,Absolut Ocean Spray,4.5,mid,light,1,False,True,False,False,False,0.8,0.024640657084188902
+5,Ace Hill Lemon Vodka Soda 355mL,Ace Hill,4.5,mid,light,2,False,False,True,False,False,0.8,0.024640657084188902
+6,Ace Hill Watermelon Vodka Soda 355mL,Ace Hill,4.5,mid,light,2,False,False,True,False,False,0.8,0.024640657084188902
+7,Ace Hill Lime Vodka Soda 355mL,Ace Hill,4.5,mid,light,2,False,False,True,False,False,0.8,0.024640657084188902
+8,White Claw Hard Seltzer Black Cherry 355mL,White Claw,5.0,mid,standard,2,False,False,True,False,False,1.0,0.024640657084188902
+9,White Claw Hard Seltzer Mango 355mL,White Claw,5.0,mid,standard,2,False,False,True,False,False,1.0,0.024640657084188902
+10,White Claw Hard Seltzer Natural Lime 355mL,White Claw,5.0,mid,standard,2,False,False,True,False,False,1.0,0.024640657084188902
+11,White Claw Hard Seltzer Raspberry 355mL,White Claw,5.0,mid,standard,2,False,False,True,False,False,1.0,0.024640657084188902
+12,Truly Wild Berry Hard Seltzer 355mL,Truly,5.0,mid,standard,2,False,False,True,False,False,1.0,0.022176591375770036
+13,Truly Lemonade Hard Seltzer 355mL,Truly,5.0,mid,standard,2,False,False,True,False,False,1.0,0.022176591375770036
+14,Truly Pineapple Hard Seltzer 355mL,Truly,5.0,mid,standard,2,False,False,True,False,False,1.0,0.022176591375770036
+15,Nude Vodka Soda Grapefruit 355mL,Nude,5.0,mid,standard,2,False,False,True,False,False,1.0,0.018480492813141694
+16,Nude Vodka Soda Peach Tea 355mL,Nude,5.0,mid,standard,2,False,False,True,False,False,1.0,0.018480492813141694
+17,Nude Vodka Soda Raspberry Lemonade 355mL,Nude,5.0,mid,standard,2,False,False,True,False,False,1.0,0.018480492813141694
+18,Cottage Springs Vodka Soda Lemon 355mL,Cottage Springs,5.0,budget,standard,2,False,False,True,False,False,1.0,0.01026694045174538
+19,Cottage Springs Vodka Soda Raspberry 355mL,Cottage Springs,5.0,budget,standard,2,False,False,True,False,False,1.0,0.01026694045174538
+20,Cottage Springs Gin & Soda Cucumber 355mL,Cottage Springs,5.0,budget,standard,2,False,False,True,False,False,1.0,0.013963039014373735
+21,Palm Bay Key Lime Cherry 355mL,Palm Bay,4.0,budget,light,1,False,True,False,False,False,0.6000000000000001,0.00574948665297742
+22,Palm Bay Mango Strawberry 355mL,Palm Bay,4.0,budget,light,1,False,True,False,False,False,0.6000000000000001,0.00574948665297742
+23,Palm Bay Tropical Lime 355mL,Palm Bay,4.0,budget,light,1,False,True,False,False,False,0.6000000000000001,0.00574948665297742
+24,Palm Bay Pineapple Coconut 355mL,Palm Bay,4.0,budget,light,1,False,True,False,False,False,0.6000000000000001,0.00574948665297742
+25,Mike's Hard Lemonade 355mL,Mike's Hard,5.0,mid,standard,1,False,True,False,False,False,1.0,0.016427104722792615
+26,Mike's Hard Black Cherry Lemonade 355mL,Mike's Hard,5.0,mid,standard,1,False,True,False,False,False,1.0,0.016427104722792615
+27,Mike's Hard Watermelon 355mL,Mike's Hard,5.0,mid,standard,1,False,True,False,False,False,1.0,0.016427104722792615
+28,Smirnoff Ice Original 355mL,Smirnoff,4.5,budget,light,1,False,True,False,False,False,0.8,0.009856262833675578
+29,Smirnoff Ice Screwdriver 355mL,Smirnoff,4.5,budget,light,1,False,True,False,False,False,0.8,0.009856262833675578
+30,Smirnoff Ice Raspberry 355mL,Smirnoff,4.5,budget,light,1,False,True,False,False,False,0.8,0.009856262833675578
+31,Creemore Springs Radler Grapefruit 355mL,Creemore Springs,2.5,budget,session,4,False,False,False,False,True,0.0,0.013963039014373735
+32,Bud Light Lime Clamato 355mL,Bud Light,4.0,budget,light,1,False,True,False,False,False,0.6000000000000001,0.0
+33,Vizzy Hard Seltzer Blueberry Pomegranate 355mL,Vizzy,5.0,mid,standard,2,False,False,True,False,False,1.0,0.022176591375770036
+34,Vizzy Hard Seltzer Pineapple Mango 355mL,Vizzy,5.0,mid,standard,2,False,False,True,False,False,1.0,0.022176591375770036
+35,Vizzy Hard Seltzer Strawberry Kiwi 355mL,Vizzy,5.0,mid,standard,2,False,False,True,False,False,1.0,0.022176591375770036
+36,Strongbow Gold Apple Cider 473mL,Strongbow,5.0,budget,standard,0,True,False,False,False,False,1.0,0.013963039014373735
+37,Strongbow Dark Fruit Cider 473mL,Strongbow,4.5,budget,light,0,True,False,False,False,False,0.8,0.013963039014373735
+38,Molson Canadian Cider 355mL,Molson,5.0,budget,standard,0,True,False,False,False,False,1.0,0.009856262833675578
+39,Rekorderlig Strawberry Lime Cider 500mL,Rekorderlig,4.5,mid,light,0,True,False,False,False,False,0.8,0.05503080082135524
+40,Rekorderlig Mango Raspberry Cider 500mL,Rekorderlig,4.5,mid,light,0,True,False,False,False,False,0.8,0.05503080082135524
+41,Kopparberg Mixed Fruit Cider 500mL,Kopparberg,4.5,mid,light,0,True,False,False,False,False,0.8,0.05092402464065708
+42,Kopparberg Strawberry Lime Cider 500mL,Kopparberg,4.5,mid,light,0,True,False,False,False,False,0.8,0.05092402464065708
+43,Somersby Apple Cider 500mL,Somersby,4.5,mid,light,0,True,False,False,False,False,0.8,0.03285420944558522
+44,Somersby Blackberry Cider 500mL,Somersby,4.5,mid,light,0,True,False,False,False,False,0.8,0.03285420944558522
+45,Caesar Craft Vodka Clamato 355mL,Mott's Clamato,5.0,mid,standard,3,False,False,False,True,False,1.0,0.03449691991786448
+46,Mott's Clamato Caesar Original 355mL,Mott's Clamato,5.0,mid,standard,3,False,False,False,True,False,1.0,0.03449691991786448
+47,Mott's Clamato Caesar Extra Spicy 355mL,Mott's Clamato,5.0,mid,standard,3,False,False,False,True,False,1.0,0.03449691991786448
+48,NÜTRL Vodka Soda Grapefruit 355mL,NÜTRL,4.5,mid,light,2,False,False,True,False,False,0.8,0.016427104722792615
+49,NÜTRL Vodka Soda Raspberry 355mL,NÜTRL,4.5,mid,light,2,False,False,True,False,False,0.8,0.016427104722792615
+50,NÜTRL Vodka Soda Watermelon 355mL,NÜTRL,4.5,mid,light,2,False,False,True,False,False,0.8,0.016427104722792615

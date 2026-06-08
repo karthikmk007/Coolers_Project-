@@ -1,0 +1,51 @@
+cooler_id,name,brand_name,normalized_category,abv,price_cents,price_dollars,image_url,lcbo_id,created_at
+1,-196 Lemon Vodka Soda 500mL,-196 LEMON VODKA SODA,hard_seltzer,,350,3.50,,lcbo-100001,2024-01-15T10:00:00Z
+2,Absolut Cocktail Espresso Martini 355mL,Absolut,cooler,5.0,2695,26.95,,lcbo-100002,2024-01-15T10:01:00Z
+3,Absolut Cocktail Vodka Mojito 355mL,Absolut,cooler,5.0,2700,27.00,,lcbo-100003,2024-01-15T10:02:00Z
+4,Absolut Ocean Spray Cranberry 355mL,Absolut Ocean Spray,cooler,4.5,325,3.25,,lcbo-100004,2024-01-15T10:03:00Z
+5,Ace Hill Lemon Vodka Soda 355mL,Ace Hill,hard_seltzer,4.5,325,3.25,,lcbo-100005,2024-01-15T10:04:00Z
+6,Ace Hill Watermelon Vodka Soda 355mL,Ace Hill,hard_seltzer,4.5,325,3.25,,lcbo-100006,2024-01-15T10:05:00Z
+7,Ace Hill Lime Vodka Soda 355mL,Ace Hill,hard_seltzer,4.5,325,3.25,,lcbo-100007,2024-01-15T10:06:00Z
+8,White Claw Hard Seltzer Black Cherry 355mL,White Claw,hard_seltzer,5.0,325,3.25,,lcbo-100008,2024-01-15T10:07:00Z
+9,White Claw Hard Seltzer Mango 355mL,White Claw,hard_seltzer,5.0,325,3.25,,lcbo-100009,2024-01-15T10:08:00Z
+10,White Claw Hard Seltzer Natural Lime 355mL,White Claw,hard_seltzer,5.0,325,3.25,,lcbo-100010,2024-01-15T10:09:00Z
+11,White Claw Hard Seltzer Raspberry 355mL,White Claw,hard_seltzer,5.0,325,3.25,,lcbo-100011,2024-01-15T10:10:00Z
+12,Truly Wild Berry Hard Seltzer 355mL,Truly,hard_seltzer,5.0,319,3.19,,lcbo-100012,2024-01-15T10:11:00Z
+13,Truly Lemonade Hard Seltzer 355mL,Truly,hard_seltzer,5.0,319,3.19,,lcbo-100013,2024-01-15T10:12:00Z
+14,Truly Pineapple Hard Seltzer 355mL,Truly,hard_seltzer,5.0,319,3.19,,lcbo-100014,2024-01-15T10:13:00Z
+15,Nude Vodka Soda Grapefruit 355mL,Nude,hard_seltzer,5.0,310,3.10,,lcbo-100015,2024-01-15T10:14:00Z
+16,Nude Vodka Soda Peach Tea 355mL,Nude,hard_seltzer,5.0,310,3.10,,lcbo-100016,2024-01-15T10:15:00Z
+17,Nude Vodka Soda Raspberry Lemonade 355mL,Nude,hard_seltzer,5.0,310,3.10,,lcbo-100017,2024-01-15T10:16:00Z
+18,Cottage Springs Vodka Soda Lemon 355mL,Cottage Springs,hard_seltzer,5.0,290,2.90,,lcbo-100018,2024-01-15T10:17:00Z
+19,Cottage Springs Vodka Soda Raspberry 355mL,Cottage Springs,hard_seltzer,5.0,290,2.90,,lcbo-100019,2024-01-15T10:18:00Z
+20,Cottage Springs Gin & Soda Cucumber 355mL,Cottage Springs,hard_seltzer,5.0,299,2.99,,lcbo-100020,2024-01-15T10:19:00Z
+21,Palm Bay Key Lime Cherry 355mL,Palm Bay,cooler,4.0,279,2.79,,lcbo-100021,2024-01-15T10:20:00Z
+22,Palm Bay Mango Strawberry 355mL,Palm Bay,cooler,4.0,279,2.79,,lcbo-100022,2024-01-15T10:21:00Z
+23,Palm Bay Tropical Lime 355mL,Palm Bay,cooler,4.0,279,2.79,,lcbo-100023,2024-01-15T10:22:00Z
+24,Palm Bay Pineapple Coconut 355mL,Palm Bay,cooler,4.0,279,2.79,,lcbo-100024,2024-01-15T10:23:00Z
+25,Mike's Hard Lemonade 355mL,Mike's Hard,cooler,5.0,305,3.05,,lcbo-100025,2024-01-15T10:24:00Z
+26,Mike's Hard Black Cherry Lemonade 355mL,Mike's Hard,cooler,5.0,305,3.05,,lcbo-100026,2024-01-15T10:25:00Z
+27,Mike's Hard Watermelon 355mL,Mike's Hard,cooler,5.0,305,3.05,,lcbo-100027,2024-01-15T10:26:00Z
+28,Smirnoff Ice Original 355mL,Smirnoff,cooler,4.5,289,2.89,,lcbo-100028,2024-01-15T10:27:00Z
+29,Smirnoff Ice Screwdriver 355mL,Smirnoff,cooler,4.5,289,2.89,,lcbo-100029,2024-01-15T10:28:00Z
+30,Smirnoff Ice Raspberry 355mL,Smirnoff,cooler,4.5,289,2.89,,lcbo-100030,2024-01-15T10:29:00Z
+31,Creemore Springs Radler Grapefruit 355mL,Creemore Springs,radler,2.5,299,2.99,,lcbo-100031,2024-01-15T10:30:00Z
+32,Bud Light Lime Clamato 355mL,Bud Light,cooler,4.0,265,2.65,,lcbo-100032,2024-01-15T10:31:00Z
+33,Vizzy Hard Seltzer Blueberry Pomegranate 355mL,Vizzy,hard_seltzer,5.0,319,3.19,,lcbo-100033,2024-01-15T10:32:00Z
+34,Vizzy Hard Seltzer Pineapple Mango 355mL,Vizzy,hard_seltzer,5.0,319,3.19,,lcbo-100034,2024-01-15T10:33:00Z
+35,Vizzy Hard Seltzer Strawberry Kiwi 355mL,Vizzy,hard_seltzer,5.0,319,3.19,,lcbo-100035,2024-01-15T10:34:00Z
+36,Strongbow Gold Apple Cider 473mL,Strongbow,cider,5.0,299,2.99,,lcbo-100036,2024-01-15T10:35:00Z
+37,Strongbow Dark Fruit Cider 473mL,Strongbow,cider,4.5,299,2.99,,lcbo-100037,2024-01-15T10:36:00Z
+38,Molson Canadian Cider 355mL,Molson,cider,5.0,289,2.89,,lcbo-100038,2024-01-15T10:37:00Z
+39,Rekorderlig Strawberry Lime Cider 500mL,Rekorderlig,cider,4.5,399,3.99,,lcbo-100039,2024-01-15T10:38:00Z
+40,Rekorderlig Mango Raspberry Cider 500mL,Rekorderlig,cider,4.5,399,3.99,,lcbo-100040,2024-01-15T10:39:00Z
+41,Kopparberg Mixed Fruit Cider 500mL,Kopparberg,cider,4.5,389,3.89,,lcbo-100041,2024-01-15T10:40:00Z
+42,Kopparberg Strawberry Lime Cider 500mL,Kopparberg,cider,4.5,389,3.89,,lcbo-100042,2024-01-15T10:41:00Z
+43,Somersby Apple Cider 500mL,Somersby,cider,4.5,345,3.45,,lcbo-100043,2024-01-15T10:42:00Z
+44,Somersby Blackberry Cider 500mL,Somersby,cider,4.5,345,3.45,,lcbo-100044,2024-01-15T10:43:00Z
+45,Caesar Craft Vodka Clamato 355mL,Mott's Clamato,other,5.0,349,3.49,,lcbo-100045,2024-01-15T10:44:00Z
+46,Mott's Clamato Caesar Original 355mL,Mott's Clamato,other,5.0,349,3.49,,lcbo-100046,2024-01-15T10:45:00Z
+47,Mott's Clamato Caesar Extra Spicy 355mL,Mott's Clamato,other,5.0,349,3.49,,lcbo-100047,2024-01-15T10:46:00Z
+48,NÜTRL Vodka Soda Grapefruit 355mL,NÜTRL,hard_seltzer,4.5,305,3.05,,lcbo-100048,2024-01-15T10:47:00Z
+49,NÜTRL Vodka Soda Raspberry 355mL,NÜTRL,hard_seltzer,4.5,305,3.05,,lcbo-100049,2024-01-15T10:48:00Z
+50,NÜTRL Vodka Soda Watermelon 355mL,NÜTRL,hard_seltzer,4.5,305,3.05,,lcbo-100050,2024-01-15T10:49:00Z

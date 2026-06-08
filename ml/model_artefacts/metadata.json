@@ -1,0 +1,8 @@
+{
+  "n_coolers": 50,
+  "n_users": 14,
+  "n_ratings": 50,
+  "model_type": "hybrid_content_collaborative",
+  "alpha": 0.6,
+  "beta": 0.4
+}

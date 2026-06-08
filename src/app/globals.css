@@ -2,7 +2,7 @@
 
 /* ─── Design Tokens ──────────────────────────────────────────── */
 @theme {
-  /* Colors */
+  /* ── Legacy tokens (existing pages) ── */
   --color-cream:     #F2EDE0;
   --color-cream-dim: #E8E2D4;
   --color-ink:       #0A0A0A;
@@ -14,10 +14,23 @@
   --color-amber:     #E8890C;
   --color-amber-dim: #C47409;
 
-  /* Fonts */
-  --font-display: var(--font-fraunces);
-  --font-sans:    var(--font-archivo);
-  --font-mono:    var(--font-jetbrains);
+  /* ── CRACKED v3 design tokens ──────── */
+  --color-cracked-orange:   #F97316;
+  --color-cracked-lime:     #A3E635;
+  --color-cracked-dark:     #111111;
+  --color-cracked-charcoal: #1C1C1E;
+  --color-cracked-cream:    #FFFBF5;
+  --color-cracked-muted:    #6B7280;
+  --color-cracked-success:  #22C55E;
+  --color-cracked-warning:  #F59E0B;
+  --color-cracked-danger:   #EF4444;
+
+  /* ── Fonts ──────────────────────────── */
+  --font-display:       var(--font-fraunces);
+  --font-sans:          var(--font-archivo);
+  --font-mono:          var(--font-jetbrains);
+  --font-bebas:         var(--font-bebas-neue);
+  --font-dm:            var(--font-dm-sans);
 }
 
 /* ─── Base ───────────────────────────────────────────────────── */
@@ -76,11 +89,21 @@ body::before {
 /* ─── Scrollbar ──────────────────────────────────────────────── */
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #F2EDE0;
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #0A0A0A;
+  background: rgba(10,10,10,0.25);
   border-radius: 0;
+}
+
+/* ─── Scrollbar hide utility ─────────────────────────────────── */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }

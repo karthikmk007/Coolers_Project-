@@ -114,6 +114,7 @@ const FLAVOR_DB: Record<string, FlavorEntry> = {
   },
 };
 
+export { FLAVOR_DB };
 const SORTED_KEYS = Object.keys(FLAVOR_DB).sort((a, b) => b.length - a.length);
 
 export function extractFlavors(name: string): string[] {

@@ -1,7 +1,15 @@
-import type { Metadata } from "next";
-import { Fraunces, Archivo, JetBrains_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Providers } from "@/components/layout/Providers";
+import {
+  Fraunces,
+  Archivo,
+  JetBrains_Mono,
+  Bebas_Neue,
+  DM_Sans,
+} from "next/font/google";
 import "./globals.css";
 
+// ── Legacy fonts (existing pages) ────────────────────────────
 const fraunces = Fraunces({
   variable: "--font-fraunces",
   subsets: ["latin"],
@@ -21,23 +29,55 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+// ── CRACKED v3 fonts ──────────────────────────────────────────
+const bebasNeue = Bebas_Neue({
+  variable: "--font-bebas-neue",
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+});
+
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+// ── Metadata + viewport ───────────────────────────────────────
 export const metadata: Metadata = {
-  title: "Cracked. — RTD · ON",
+  title: "CRACKED — What's Cracking Near You",
   description:
-    "An ML-engineered catalogue of every cooler, seltzer and cider sold across Ontario — scraped politely, normalised rigorously, and recommended via cosine similarity over flavour embeddings.",
+    "Rate, discover, and track every RTD cooler, seltzer, and cider at Ontario LCBO. Vivino for the cooler aisle.",
+  manifest: "/manifest.json",
+  appleWebApp: { capable: true, statusBarStyle: "black-translucent" },
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  themeColor: "#F97316",
+};
+
+// ── Root layout ───────────────────────────────────────────────
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const fontVars = [
+    fraunces.variable,
+    archivo.variable,
+    jetbrainsMono.variable,
+    bebasNeue.variable,
+    dmSans.variable,
+  ].join(" ");
+
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={`${fraunces.variable} ${archivo.variable} ${jetbrainsMono.variable} h-full`}
-    >
-      <body suppressHydrationWarning className="min-h-full flex flex-col bg-cream text-ink antialiased">
-        {children}
+    <html lang="en" suppressHydrationWarning className={`${fontVars} h-full`}>
+      <body
+        suppressHydrationWarning
+        className="min-h-full flex flex-col bg-cracked-cream text-cracked-dark antialiased"
+      >
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

@@ -3,7 +3,7 @@ import { getUser } from "@/lib/auth";
 import { logout } from "@/app/actions/auth";
 
 interface NavProps {
-  active?: "index" | "catalogue";
+  active?: "index" | "catalogue" | "discover";
 }
 
 export async function Nav({ active }: NavProps) {
@@ -38,6 +38,16 @@ export async function Nav({ active }: NavProps) {
           }`}
         >
           Catalogue
+        </Link>
+        <Link
+          href="/discover"
+          className={`font-mono text-[11px] tracking-widest uppercase transition-colors ${
+            active === "discover"
+              ? "text-ink underline underline-offset-4 decoration-1"
+              : "text-ink/50 hover:text-ink"
+          }`}
+        >
+          Discover
         </Link>
 
         {user ? (

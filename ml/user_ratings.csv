@@ -1,0 +1,51 @@
+rating_id,cooler_id,user_handle,rating,review_body,created_at
+1,8,TorontoML_Recruiter,5,Crisp and refreshing. The black cherry flavour is perfectly balanced — not too sweet.,2024-02-01T14:23:00Z
+2,9,TorontoML_Recruiter,4,Mango is subtle and tropical. Great poolside drink.,2024-02-01T14:25:00Z
+3,1,TorontoML_Recruiter,5,Super clean lemon flavour. Probably the best RTD for the price in Ontario.,2024-02-01T14:27:00Z
+4,10,PaddleboarderKev,4,Classic lime seltzer done right. Goes down too easy.,2024-02-03T09:11:00Z
+5,25,PaddleboarderKev,3,A bit sweet for me but solid if you like lemonade.,2024-02-03T09:14:00Z
+6,21,PaddleboarderKev,5,Palm Bay hits different at a cottage. Key lime cherry is the move.,2024-02-03T09:17:00Z
+7,36,CiderSommelier,5,Strongbow Gold Apple is the benchmark for Ontario cider. Crisp dry finish.,2024-02-05T19:45:00Z
+8,39,CiderSommelier,4,Rekorderlig is sweeter than I prefer but the strawberry lime combo is undeniably delicious.,2024-02-05T19:48:00Z
+9,41,CiderSommelier,4,Kopparberg mixed fruit is fruity but not cloying. Good cider for the price.,2024-02-05T19:51:00Z
+10,43,CiderSommelier,3,Somersby is serviceable but lacks depth compared to European imports.,2024-02-05T19:54:00Z
+11,15,LCBOHunter,5,Nude grapefruit is underrated. Clean spirit base with real citrus bite.,2024-02-08T11:30:00Z
+12,16,LCBOHunter,4,Peach tea Nude is unique — actually tastes like iced tea with a kick.,2024-02-08T11:33:00Z
+13,48,LCBOHunter,4,NÜTRL grapefruit competes with Nude. Slightly more carbonation which I prefer.,2024-02-08T11:36:00Z
+14,49,LCBOHunter,3,NÜTRL raspberry is a bit artificial tasting vs the grapefruit version.,2024-02-08T11:39:00Z
+15,5,SundownDrinker,5,Ace Hill Lemon is the Ontario local hero. Support local.,2024-02-10T20:00:00Z
+16,6,SundownDrinker,4,Watermelon Ace Hill is great for summer patios.,2024-02-10T20:03:00Z
+17,7,SundownDrinker,4,Lime version is solid too. Consistent quality across the Ace Hill lineup.,2024-02-10T20:06:00Z
+18,28,SundownDrinker,2,Smirnoff Ice is too sweet. More like a pop than a real drink.,2024-02-10T20:09:00Z
+19,32,CaesarConnoisseur,5,Bud Light Clamato Caesar hits different after a long week.,2024-02-12T17:55:00Z
+20,45,CaesarConnoisseur,5,The craft Caesar is elevated — more complex spice profile.,2024-02-12T17:58:00Z
+21,46,CaesarConnoisseur,4,Classic Mott's Caesar Original. The original and still great.,2024-02-12T18:01:00Z
+22,47,CaesarConnoisseur,5,Extra spicy is the way to go if you can handle heat.,2024-02-12T18:04:00Z
+23,2,CoffeeAndCocktails,5,Absolut Espresso Martini in a can is legitimately good. Saved me $20 at a bar.,2024-02-14T22:10:00Z
+24,3,CoffeeAndCocktails,4,Vodka Mojito from Absolut is fresh and minty. Perfect summer RTD.,2024-02-14T22:13:00Z
+25,4,CoffeeAndCocktails,3,Ocean Spray collab is decent but I prefer the pure vodka sodas.,2024-02-14T22:16:00Z
+26,33,HealthyHydration,4,Vizzy blueberry pomegranate is a nice change from the usual suspects.,2024-02-17T10:45:00Z
+27,34,HealthyHydration,5,Pineapple mango Vizzy is tropical perfection. My new summer staple.,2024-02-17T10:48:00Z
+28,12,HealthyHydration,3,Truly Wild Berry is fine but not as clean as White Claw.,2024-02-17T10:51:00Z
+29,13,HealthyHydration,4,Truly Lemonade is bold and tangy. Good if you want more flavour punch.,2024-02-17T10:54:00Z
+30,18,BudgetBeverage,5,Cottage Springs Lemon is the best value vodka soda in Ontario.,2024-02-19T15:20:00Z
+31,19,BudgetBeverage,4,Raspberry Cottage Springs is close second. Both are excellent for the price.,2024-02-19T15:23:00Z
+32,20,BudgetBeverage,4,Gin and Soda Cucumber is sophisticated. Great for gin lovers on a budget.,2024-02-19T15:26:00Z
+33,8,PatioSeason,4,White Claw Black Cherry is a classic for a reason.,2024-02-21T13:00:00Z
+34,11,PatioSeason,5,White Claw Raspberry might be their best flavour overall.,2024-02-21T13:03:00Z
+35,22,PatioSeason,4,Palm Bay Mango Strawberry is ridiculously fruity — in a good way.,2024-02-21T13:06:00Z
+36,37,AppleOrchardFan,4,Strongbow Dark Fruit has an interesting berry-forward character.,2024-02-23T18:30:00Z
+37,40,AppleOrchardFan,5,Rekorderlig Mango Raspberry is my favourite premium cider. So unique.,2024-02-23T18:33:00Z
+38,42,AppleOrchardFan,3,Kopparberg Strawberry Lime is very sweet — dessert in a can.,2024-02-23T18:36:00Z
+39,44,AppleOrchardFan,3,Somersby Blackberry is okay but the apple version is better.,2024-02-23T18:39:00Z
+40,1,NightOwl99,5,The -196 Lemon is elite. Nothing else at this price point competes.,2024-02-25T23:45:00Z
+41,5,NightOwl99,4,Ace Hill Lemon is second place for lemon RTDs after -196.,2024-02-25T23:48:00Z
+42,15,NightOwl99,4,Nude Grapefruit is a great late night option.,2024-02-25T23:51:00Z
+43,50,NightOwl99,5,NÜTRL Watermelon is summer in a can. Buy a case.,2024-02-25T23:54:00Z
+44,31,CasualFridayDrinks,3,Creemore Radler is a bit too mellow for me but solid for a session drink.,2024-02-27T17:10:00Z
+45,26,CasualFridayDrinks,4,Mike's Hard Black Cherry Lemonade is nostalgic and still hits.,2024-02-27T17:13:00Z
+46,27,CasualFridayDrinks,3,Mike's Hard Watermelon is too sweet but fine for a casual Friday.,2024-02-27T17:16:00Z
+47,29,CasualFridayDrinks,2,Smirnoff Ice Screwdriver tastes like orange pop.,2024-02-27T17:19:00Z
+48,23,SummerCottage,5,Palm Bay Tropical Lime is the ultimate dock drink.,2024-03-01T12:00:00Z
+49,24,SummerCottage,4,Palm Bay Pineapple Coconut is very tropical — great for a themed party.,2024-03-01T12:03:00Z
+50,17,SummerCottage,5,Nude Raspberry Lemonade is dangerously drinkable. Watch out.,2024-03-01T12:06:00Z

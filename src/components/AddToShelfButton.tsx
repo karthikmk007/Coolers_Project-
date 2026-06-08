@@ -27,6 +27,8 @@ export function AddToShelfButton({ productId }: { productId: number }) {
     setSaved(getShelf().has(productId));
   }, [productId]);
 
+  const [flash, setFlash] = useState(false);
+
   function handleClick() {
     setAnimating(true);
     setSaved((prev) => {
@@ -35,6 +37,9 @@ export function AddToShelfButton({ productId }: { productId: number }) {
         shelf.delete(productId);
       } else {
         shelf.add(productId);
+        // Flash "Added!" only when adding (#7)
+        setFlash(true);
+        setTimeout(() => setFlash(false), 1200);
       }
       saveShelf(shelf);
       return !prev;
@@ -49,13 +54,15 @@ export function AddToShelfButton({ productId }: { productId: number }) {
       className={`flex items-center gap-2 px-6 md:px-8 py-3 font-mono text-[11px] font-bold tracking-widest uppercase transition-all duration-200 ${
         animating ? "scale-95" : "scale-100"
       } ${
-        saved
+        flash
+          ? "bg-lime text-ink scale-[1.04]"
+          : saved
           ? "bg-ink text-lime border border-lime/40 hover:bg-ink/80"
           : "bg-lime text-ink hover:bg-lime/80"
       }`}
     >
-      <span className="text-base leading-none">{saved ? "✓" : "+"}</span>
-      <span>{saved ? "On Your Shelf" : "Add to Shelf"}</span>
+      <span className="text-base leading-none">{flash ? "✓" : saved ? "✓" : "+"}</span>
+      <span>{flash ? "Added!" : saved ? "On Your Shelf" : "Add to Shelf"}</span>
     </button>
   );
 }
