@@ -80,7 +80,9 @@
       "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\('hasNextPage:', d['data']['products']['pageInfo']['hasNextPage']\\)\")",
       "Bash(node -e \"require\\('@zxing/browser'\\); console.log\\('zxing ✅'\\)\")",
       "Bash(node -e \"require\\('canvas-confetti'\\); console.log\\('confetti ✅'\\)\")",
-      "Bash(mkdir -p \"/Users/karthikkumaran/Coolers_Project/src/app/\\(app\\)/product/[id]\" *)"
+      "Bash(mkdir -p \"/Users/karthikkumaran/Coolers_Project/src/app/\\(app\\)/product/[id]\" *)",
+      "Bash(echo \"=== tsc exit: $? ===\")",
+      "Bash(npx tsx *)"
     ]
   }
 }

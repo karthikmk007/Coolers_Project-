@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 
-// The split-panel catalogue is the primary experience — redirect home to it.
+// The CRACKED v3.0 app is the primary experience — land on its home feed.
 export default function Home() {
-  redirect("/browse");
+  redirect("/home");
 }

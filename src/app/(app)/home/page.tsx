@@ -20,6 +20,15 @@ export default async function HomePage() {
     .order("created_at", { ascending: false })
     .limit(8);
 
+  // Real catalogue stats for the bottom bar.
+  const { count: productCount } = await supabase
+    .from("products")
+    .select("*", { count: "exact", head: true });
+  const { data: styleRows } = await supabase.from("products").select("style");
+  const styleCount = new Set(
+    (styleRows ?? []).map((r) => r.style).filter(Boolean)
+  ).size;
+
   return (
     <main className="min-h-screen bg-cracked-cream">
       {/* ── Header ── */}
@@ -117,8 +126,8 @@ export default async function HomePage() {
       {/* ── Stats bar ── */}
       <div className="mx-4 mb-8 rounded-2xl bg-cracked-dark p-4 flex justify-around">
         {[
-          { label: "Products", value: "385" },
-          { label: "Styles",   value: "6" },
+          { label: "Products", value: productCount ? `${productCount}` : "—" },
+          { label: "Styles",   value: styleCount ? `${styleCount}` : "—" },
           { label: "Ontario",  value: "✓" },
         ].map(({ label, value }) => (
           <div key={label} className="text-center">

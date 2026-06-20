@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "aem.lcbo.com",
-        pathname: "/content/dam/lcbo/**",
+        pathname: "/**",
       },
     ],
   },

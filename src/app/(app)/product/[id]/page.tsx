@@ -15,7 +15,8 @@ import { RatingHistogram }   from "@/components/product/RatingHistogram";
 import { ReviewFeed }        from "@/components/product/ReviewFeed";
 import { SimilarCarousel }   from "@/components/product/SimilarCarousel";
 import { ProductActions }    from "./ProductActions";
-import { formatPrice, formatAbv } from "@/lib/utils/format";
+import { formatPrice, formatAbv, formatVolume } from "@/lib/utils/format";
+import { deriveTaste }       from "@/lib/taste";
 import { scoreColor }        from "@/lib/utils/score";
 import { MapPin, Beaker, Percent, Clock, Tag } from "lucide-react";
 
@@ -77,6 +78,15 @@ export default async function ProductPage({
   const color      = scoreColor(avgScore);
   const heroImg    = product.image_url ?? product.thumbnail_url;
   const crowdNotes = notesFromFlavors(product.flavor_notes ?? []);
+
+  // Taste + nutrition: prefer stored values, fall back to the deterministic
+  // model so the profile is never blank. kcal/sugar are always estimated.
+  const derived = deriveTaste(product.name, product.style, product.abv);
+  const taste = {
+    sweet: product.taste_sweet || derived.sweet,
+    bold:  product.taste_bold  || derived.bold,
+    carb:  product.taste_carb  || derived.carb,
+  };
 
   return (
     <div className="min-h-screen bg-cracked-cream pb-32">
@@ -205,11 +215,43 @@ export default async function ProductPage({
       {/* ═══ S5: TASTE PROFILE ══════════════════════════════════ */}
       <section className="px-4 mt-8 bg-white rounded-2xl mx-4 p-5 border border-neutral-100">
         <TasteSliders
-          sweet={product.taste_sweet}
-          bold={product.taste_bold}
-          carb={product.taste_carb}
+          sweet={taste.sweet}
+          bold={taste.bold}
+          carb={taste.carb}
           editable={false}
         />
+
+        {/* Nutrition — estimated, Vivino-style */}
+        <div className="mt-6 pt-5 border-t border-neutral-100">
+          <div className="flex items-center justify-between mb-3">
+            <p className="text-[10px] uppercase tracking-widest text-cracked-muted font-[family-name:var(--font-dm-sans)]">
+              Nutrition · per {formatVolume(derived.servingMl)}
+            </p>
+            <span className="text-[9px] font-bold uppercase tracking-wide text-cracked-orange bg-cracked-orange/10 px-2 py-0.5 rounded-full font-[family-name:var(--font-dm-sans)]">
+              Estimated
+            </span>
+          </div>
+          <div className="grid grid-cols-3 gap-3">
+            {[
+              { label: "Calories", value: `${derived.kcal}`,        unit: "kcal" },
+              { label: "Sugar",    value: `${derived.sugar_g}`,     unit: "g"    },
+              { label: "ABV",      value: product.abv ? `${product.abv}` : "—", unit: "%" },
+            ].map(({ label, value, unit }) => (
+              <div key={label} className="bg-neutral-50 rounded-xl p-3 text-center">
+                <p className="font-bold text-cracked-dark leading-none" style={{ fontFamily: "var(--font-jetbrains)", fontSize: 22 }}>
+                  {value}
+                  <span className="text-[10px] text-cracked-muted ml-0.5">{unit}</span>
+                </p>
+                <p className="text-[9px] uppercase tracking-widest text-cracked-muted mt-1.5 font-[family-name:var(--font-dm-sans)]">
+                  {label}
+                </p>
+              </div>
+            ))}
+          </div>
+          <p className="text-[9px] text-cracked-muted/70 mt-3 font-[family-name:var(--font-dm-sans)] leading-relaxed">
+            Estimated from ABV &amp; flavour profile — not lab-verified.
+          </p>
+        </div>
       </section>
 
       {/* ═══ S6: PAIRS GREAT WITH ═══════════════════════════════ */}
