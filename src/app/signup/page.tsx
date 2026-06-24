@@ -7,20 +7,26 @@ import { signup } from "@/app/actions/auth";
 export default function SignupPage() {
   const [state, action, pending] = useActionState(signup, null);
 
+  // Only reached if email confirmation is left ON in Supabase.
   if (state?.success) {
     return (
-      <div className="min-h-screen bg-cream flex flex-col items-center justify-center px-6">
+      <div className="min-h-screen bg-cracked-cream flex flex-col items-center justify-center px-6">
         <div className="w-full max-w-sm text-center">
-          <div className="w-12 h-12 bg-lime flex items-center justify-center mx-auto mb-6">
-            <span className="text-ink font-mono text-xl">✓</span>
+          <div className="w-14 h-14 rounded-2xl bg-cracked-lime flex items-center justify-center mx-auto mb-6 text-2xl">
+            ✓
           </div>
-          <h2 className="font-display text-4xl text-ink mb-4">Check your email.</h2>
-          <p className="font-mono text-[11px] uppercase tracking-widest text-ink/50 leading-relaxed">
+          <h2
+            className="text-cracked-dark mb-3"
+            style={{ fontFamily: "var(--font-bebas-neue)", fontSize: 36 }}
+          >
+            Check your email.
+          </h2>
+          <p className="text-sm text-cracked-muted leading-relaxed font-[family-name:var(--font-dm-sans)]">
             {state.success}
           </p>
           <Link
             href="/login"
-            className="mt-8 inline-block px-6 py-3 border border-ink/20 font-mono text-[10px] tracking-widest uppercase hover:border-ink transition-colors"
+            className="mt-8 inline-block px-6 py-3 border border-neutral-200 rounded-2xl text-xs font-semibold uppercase tracking-widest text-cracked-muted hover:border-cracked-orange transition-colors font-[family-name:var(--font-dm-sans)]"
           >
             ← Back to Login
           </Link>
@@ -30,117 +36,105 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="min-h-screen bg-cream flex flex-col">
-      {/* Top bar */}
-      <header className="flex items-center justify-between px-6 md:px-12 py-4 border-b border-ink/10">
-        <Link href="/" className="flex items-baseline gap-2.5">
-          <span className="font-display text-2xl tracking-tight text-ink">Cracked.</span>
-          <span className="font-mono text-[10px] tracking-widest uppercase text-ink/40">RTD · ON</span>
+    <div className="min-h-screen bg-cracked-cream flex flex-col items-center justify-center px-6 py-16">
+      <div className="w-full max-w-sm">
+        {/* Logo */}
+        <Link href="/" className="block mb-10 text-center">
+          <span
+            className="text-cracked-dark"
+            style={{ fontFamily: "var(--font-bebas-neue)", fontSize: 36 }}
+          >
+            CRACKED.
+          </span>
         </Link>
-        <Link
-          href="/login"
-          className="font-mono text-[11px] tracking-widest uppercase text-ink/50 hover:text-ink transition-colors"
-        >
-          Have an account? Sign in →
-        </Link>
-      </header>
 
-      {/* Main */}
-      <main className="flex-1 flex items-center justify-center px-6 py-16">
-        <div className="w-full max-w-sm">
-          <p className="font-mono text-[10px] tracking-widest uppercase text-ink/40 mb-3">
-            CRACKED · Join the Lab
-          </p>
-
-          <h1 className="font-display text-5xl tracking-tight text-ink leading-[0.9] mb-10">
-            Create your<br />
-            <em className="text-lime-dim">account.</em>
-          </h1>
-
-          <form action={action} className="space-y-4">
-            {/* Handle */}
-            <div>
-              <label className="font-mono text-[9px] uppercase tracking-widest text-ink/40 block mb-2">
-                Tasting Handle
-              </label>
-              <input
-                name="handle"
-                type="text"
-                autoComplete="username"
-                required
-                minLength={2}
-                maxLength={30}
-                pattern="[a-zA-Z0-9_.\-]+"
-                placeholder="e.g. TorontoML_Recruiter"
-                className="w-full border border-ink/20 bg-transparent px-4 py-3 font-mono text-sm text-ink placeholder:text-ink/25 focus:outline-none focus:border-ink transition-colors"
-              />
-              <p className="font-mono text-[9px] text-ink/30 mt-1.5 tracking-wide">
-                Letters, numbers, _ - . only. Shown on your reviews.
-              </p>
-            </div>
-
-            {/* Email */}
-            <div>
-              <label className="font-mono text-[9px] uppercase tracking-widest text-ink/40 block mb-2">
-                Email Address
-              </label>
-              <input
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                placeholder="you@example.com"
-                className="w-full border border-ink/20 bg-transparent px-4 py-3 font-mono text-sm text-ink placeholder:text-ink/25 focus:outline-none focus:border-ink transition-colors"
-              />
-            </div>
-
-            {/* Password */}
-            <div>
-              <label className="font-mono text-[9px] uppercase tracking-widest text-ink/40 block mb-2">
-                Password
-              </label>
-              <input
-                name="password"
-                type="password"
-                autoComplete="new-password"
-                required
-                minLength={8}
-                placeholder="Minimum 8 characters"
-                className="w-full border border-ink/20 bg-transparent px-4 py-3 font-mono text-sm text-ink placeholder:text-ink/25 focus:outline-none focus:border-ink transition-colors"
-              />
-            </div>
-
-            {/* Error */}
-            {state?.error && (
-              <p className="font-mono text-[10px] text-vermilion tracking-wide border border-vermilion/20 bg-vermilion/5 px-3 py-2">
-                {state.error}
-              </p>
-            )}
-
-            {/* Submit */}
-            <button
-              type="submit"
-              disabled={pending}
-              className="w-full py-3.5 bg-ink text-cream font-mono text-[11px] font-bold tracking-widest uppercase hover:bg-ink/80 transition-colors disabled:opacity-40 disabled:cursor-not-allowed mt-2"
-            >
-              {pending ? "Creating account…" : "Create Account →"}
-            </button>
-          </form>
-
-          <p className="mt-8 font-mono text-[10px] uppercase tracking-widest text-ink/30 text-center">
-            Already have an account?{" "}
-            <Link href="/login" className="text-vermilion hover:text-vermilion-dim transition-colors">
-              Sign in
-            </Link>
-          </p>
-        </div>
-      </main>
-
-      <footer className="px-6 py-4 border-t border-ink/10">
-        <p className="font-mono text-[9px] uppercase tracking-widest text-ink/20 text-center">
-          CRACKED · ML-Engineered RTD Catalogue · Ontario
+        <p className="text-[10px] tracking-widest uppercase text-cracked-orange mb-2 font-[family-name:var(--font-dm-sans)] font-bold">
+          Join the crew
         </p>
-      </footer>
+        <h1
+          className="text-cracked-dark leading-tight mb-8"
+          style={{ fontFamily: "var(--font-bebas-neue)", fontSize: 44 }}
+        >
+          Create your account.
+        </h1>
+
+        <form action={action} className="space-y-4">
+          {/* Handle */}
+          <div>
+            <label className="text-[10px] uppercase tracking-widest text-cracked-muted block mb-1.5 font-[family-name:var(--font-dm-sans)] font-semibold">
+              Tasting Handle
+            </label>
+            <input
+              name="handle"
+              type="text"
+              autoComplete="username"
+              required
+              minLength={2}
+              maxLength={30}
+              pattern="[a-zA-Z0-9_.\-]+"
+              placeholder="e.g. patio_sipper"
+              className="w-full bg-white border border-neutral-200 rounded-2xl px-4 py-3 text-sm text-cracked-dark placeholder:text-neutral-400 focus:outline-none focus:border-cracked-orange transition-colors font-[family-name:var(--font-dm-sans)]"
+            />
+            <p className="text-[10px] text-cracked-muted mt-1.5 font-[family-name:var(--font-dm-sans)]">
+              Letters, numbers, _ - . only. Shown on your reviews.
+            </p>
+          </div>
+
+          {/* Email */}
+          <div>
+            <label className="text-[10px] uppercase tracking-widest text-cracked-muted block mb-1.5 font-[family-name:var(--font-dm-sans)] font-semibold">
+              Email
+            </label>
+            <input
+              name="email"
+              type="email"
+              autoComplete="email"
+              required
+              placeholder="you@example.com"
+              className="w-full bg-white border border-neutral-200 rounded-2xl px-4 py-3 text-sm text-cracked-dark placeholder:text-neutral-400 focus:outline-none focus:border-cracked-orange transition-colors font-[family-name:var(--font-dm-sans)]"
+            />
+          </div>
+
+          {/* Password */}
+          <div>
+            <label className="text-[10px] uppercase tracking-widest text-cracked-muted block mb-1.5 font-[family-name:var(--font-dm-sans)] font-semibold">
+              Password
+            </label>
+            <input
+              name="password"
+              type="password"
+              autoComplete="new-password"
+              required
+              minLength={8}
+              placeholder="Minimum 8 characters"
+              className="w-full bg-white border border-neutral-200 rounded-2xl px-4 py-3 text-sm text-cracked-dark placeholder:text-neutral-400 focus:outline-none focus:border-cracked-orange transition-colors font-[family-name:var(--font-dm-sans)]"
+            />
+          </div>
+
+          {/* Error */}
+          {state?.error && (
+            <p className="text-xs text-cracked-orange bg-cracked-orange/10 border border-cracked-orange/20 rounded-xl px-3 py-2 font-[family-name:var(--font-dm-sans)]">
+              {state.error}
+            </p>
+          )}
+
+          {/* Submit */}
+          <button
+            type="submit"
+            disabled={pending}
+            className="w-full py-3.5 bg-cracked-orange text-white rounded-2xl text-sm font-bold uppercase tracking-widest hover:bg-orange-600 transition-colors disabled:opacity-40 disabled:cursor-not-allowed mt-2 font-[family-name:var(--font-dm-sans)]"
+          >
+            {pending ? "Creating account…" : "Create Account →"}
+          </button>
+        </form>
+
+        <p className="mt-8 text-xs text-cracked-muted text-center font-[family-name:var(--font-dm-sans)]">
+          Already have an account?{" "}
+          <Link href="/login" className="text-cracked-orange font-semibold">
+            Sign in
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }

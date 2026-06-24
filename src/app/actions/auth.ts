@@ -1,7 +1,10 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { createSupabaseServerClient } from "@/lib/supabase-server";
+import {
+  createSupabaseServerClient,
+  createSupabaseServiceClient,
+} from "@/lib/supabase-server";
 
 export async function login(_prev: unknown, formData: FormData) {
   const email    = (formData.get("email") as string)?.trim().toLowerCase();
@@ -18,7 +21,7 @@ export async function login(_prev: unknown, formData: FormData) {
     return { error: "Invalid email or password." };
   }
 
-  const next = (formData.get("next") as string) || "/browse";
+  const next = (formData.get("next") as string) || "/home";
   redirect(next);
 }
 
@@ -41,7 +44,7 @@ export async function signup(_prev: unknown, formData: FormData) {
   }
 
   const supabase = await createSupabaseServerClient();
-  const { error } = await supabase.auth.signUp({
+  const { data, error } = await supabase.auth.signUp({
     email,
     password,
     options: { data: { handle } },
@@ -54,6 +57,28 @@ export async function signup(_prev: unknown, formData: FormData) {
     return { error: error.message };
   }
 
+  // Create the matching profile row. Without this the app never registers the
+  // user as logged in (AuthProvider reads `profiles`). Service client bypasses
+  // RLS; idempotent on the user id so re-runs / the DB trigger never collide.
+  if (data.user) {
+    const admin = await createSupabaseServiceClient();
+    const { error: profileError } = await admin
+      .from("profiles")
+      .upsert(
+        { id: data.user.id, username: handle, display_name: handle },
+        { onConflict: "id" }
+      );
+    if (profileError) {
+      console.error("Failed to create profile on signup:", profileError.message);
+    }
+  }
+
+  // Email confirmation OFF → a session is returned, so log the user straight in.
+  if (data.session) {
+    redirect("/home");
+  }
+
+  // Email confirmation ON → user must verify before first login.
   return { success: "Check your email to confirm your account." };
 }
 
