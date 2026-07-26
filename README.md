@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CRACKED
 
-## Getting Started
+A mobile-first product discovery application for ready-to-drink coolers, seltzers, and ciders sold through Ontario's LCBO ecosystem. The product is designed around discovery, ratings, personal tracking, and barcode-assisted lookup.
 
-First, run the development server:
+## Product idea
+
+Alcohol retail catalogues are useful for inventory lookup but weak at personalized discovery. CRACKED explores a community-driven experience for finding products, recording preferences, and navigating the cooler aisle.
+
+## Technology
+
+- Next.js 16 and React 19
+- TypeScript
+- Supabase client and SSR helpers
+- TanStack Query
+- Zustand
+- Tailwind CSS
+- Framer Motion
+- ZXing browser barcode support
+
+## Run locally
+
+```bash
+git clone https://github.com/karthikmk007/Coolers_Project-.git
+cd Coolers_Project-
+npm install
+npm run dev
+```
+
+Open `http://localhost:3000`. The root route redirects to `/home`.
+
+## Available scripts
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build
+npm run start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Configuration
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The application includes Supabase packages and may require public Supabase environment variables for data-backed features. Before public deployment, add a committed `.env.example` containing variable names only—never real credentials.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Product and engineering notes
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- This is an independent portfolio project and is not affiliated with or endorsed by the LCBO.
+- Verify all product data rights and terms before production use.
+- Alcohol-related discovery features should include responsible-use messaging and age-appropriate access controls.
+- Add automated tests, CI, screenshots, a hosted demo, and documented database setup before presenting this as production-ready.
